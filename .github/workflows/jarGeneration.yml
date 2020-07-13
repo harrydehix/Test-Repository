@@ -30,17 +30,16 @@ jobs:
     - name: Compile source code
       run: |
         rootPath=$(pwd)
-        echo $rootPath
+
         compileSrc(){
           cd $rootPath
 
-          cd "$rootPath/$0"
-          srcPath=$(pwd)
-          cd $rootPath
+          srcPath="{$rootPath}{$1}"
+          binPath="{$rootPath}{$2}"
 
-          cd "$rootPath/$1"
-          binPath=$(pwd)
-
+          echo "Root path is: {$rootPath}"
+          echo "Src path is: {$srcPath}"
+          echo "Bin path is: {$binPath}"
 
           cd $srcPath
 
@@ -57,18 +56,18 @@ jobs:
     - name: Generate jars from manifest
       run: |
         rootPath=$(pwd)
-        echo $rootPath
+
         generateJar(){
           cd $rootPath
 
-          cd "$rootPath/$0"
-          srcPath=$(pwd)
-          cd $rootPath
+          srcPath="{$rootPath}{$1}"
+          binPath="{$rootPath}{$2}"
 
-          cd "$rootPath/$1"
-          binPath=$(pwd)
+          echo "Root path is: {$rootPath}"
+          echo "Src path is: {$srcPath}"
+          echo "Bin path is: {$binPath}"
 
-          cd $binPath/manifests
+          cd "{$binPath}/manifests"
 
           for file in *.mf; do(
               fileName="$(basename -s .mf $file)";
