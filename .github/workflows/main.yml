@@ -24,7 +24,12 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
+    - name: Change file permissions
+      run: |
+        chmod +x java-compile.sh
+        chmod +x java-jar.sh
+        chmod +x test.sh
+      
     - name: Compile source code
       run: ./java-compile.sh
     
