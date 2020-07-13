@@ -31,7 +31,7 @@ jobs:
       run: |
         cd src/
         find -name "*.java" > sources.txt
-        mkdir "../bin/classes"
+        mkdir -p "../bin/classes"
         javac -d "../bin/classes/" @sources.txt
         unlink sources.txt
         cd ../
