@@ -32,6 +32,7 @@ jobs:
         rootPath=$(pwd)
         echo $rootPath
         compileSrc(){
+          cd $rootPath
 
           cd $0
           srcPath=$(pwd)
@@ -55,8 +56,10 @@ jobs:
     
     - name: Generate jars from manifest
       run: |
+        rootPath=$(pwd)
+        echo $rootPath
         generateJar(){
-          rootPath=$(pwd)
+          cd $rootPath
 
           cd $0
           srcPath=$(pwd)
