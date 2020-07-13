@@ -48,7 +48,7 @@ jobs:
           javac -d "$binPath/classes/" @sources.txt
           unlink sources.txt
 
-          cd rootPath
+          cd $rootPath
         }
         compileSrc "proj1/src/" "proj1/bin/"
         compileSrc "proj2/src/" "proj2/bin/"
