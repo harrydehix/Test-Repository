@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: app.lol.Lol
+Built-By: Henri
+Created-By: 1.8.0_171
+
