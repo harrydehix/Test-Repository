@@ -7,6 +7,6 @@ for file in *.mf; do(
     echo $file;
     
     cd ../classes/
-    jar cfm "../$fileName.jar" "../manifests/$file" "*";
+    jar cfm "../$fileName.jar" "../manifests/$file" "./";
     cd ../manifests/
 ) done
