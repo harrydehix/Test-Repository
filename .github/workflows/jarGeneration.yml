@@ -36,29 +36,34 @@ jobs:
         compileSrc(){
           cd $rootPath
 
-          projectPath="$rootPath/$1"
-          srcPath="$projectPath/src"
-          binPath="$projectPath/bin"
+          projectPath1="$rootPath/$1"
+          srcPath1="$projectPath1/src"
+          binPath1="$projectPath1/bin"
+
+          projectPath2="$rootPath/$2"
+          srcPath2="$projectPath2/src"
+          binPath2="$projectPath2/bin"
 
           echo "---------------------------------------------------------------------------------"
           echo "Project name: $1"
-          echo "Project path: $projectPath"
-          echo "Project src path: $srcPath"
-          echo "Project bin path: $binPath"
+          echo "Project path: $projectPath1"
+          echo "Project src path: $srcPath1"
+          echo "Project bin path: $binPath1"
+          echo "Linked project path: $projectPath2"
           echo "---------------------------------------------------------------------------------"
 
-          cd $srcPath
+          cd $srcPath1
+          find "$srcPath1" "$srcPath2" -name "*.java" > sources.txt
 
-          find -name "*.java" > sources.txt
-          mkdir -p "$binPath/classes"
-          javac -d "$binPath/classes/" @sources.txt
+          mkdir -p "$binPath1/classes"
+          javac -d "$binPath1/classes/" @sources.txt
           unlink sources.txt
 
           echo "COMPILATION FOR PROJECT $1 FINISHED"
           cd $rootPath
         }
-        compileSrc "proj1"
-        compileSrc "proj2"
+        compileSrc "proj1" "proj2"
+        compileSrc "proj2" "proj1"
         echo "---------------------------------------------------------------------------------"
         echo "COMPILED SOURCE CODE"
         echo "---------------------------------------------------------------------------------"
@@ -77,14 +82,6 @@ jobs:
           srcPath="$projectPath/src"
           binPath="$projectPath/bin"
 
-          if [ -z "$2" ]
-          then
-                echo "No other project was linked"
-          else
-                linkedProjectClassPath="$rootPath/$2/bin/classes/"
-                echo "Linked other project"
-          fi
-
           cd "$binPath/manifests"
 
           for file in *.mf; do(
@@ -92,12 +89,7 @@ jobs:
               echo $file;
               
               cd ../classes/
-              if [ -z "$2" ]
-              then
-                    jar cfm "../$fileName.jar" "../manifests/$file" "./";
-              else
-                    jar cfm "../$fileName.jar" "../manifests/$file" "./" "$linkedProjectClassPath";
-              fi
+              jar cfm "../$fileName.jar" "../manifests/$file" "./";
               cd ../manifests/
           ) done
 
@@ -105,7 +97,7 @@ jobs:
 
           cd $rootPath
         }
-        generateJar "proj1" "proj2"
+        generateJar "proj1"
         generateJar "proj2"
         echo "---------------------------------------------------------------------------------"
         echo "GENERATED JARS USING MANIFESTS"
