@@ -30,7 +30,7 @@ jobs:
     - name: Compile source code
       run: |
         rootPath=$(pwd)
-        echo rootPath
+        echo $rootPath
         compileSrc(){
 
           cd $0
