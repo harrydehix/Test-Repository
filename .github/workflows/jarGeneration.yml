@@ -37,7 +37,8 @@ jobs:
     - name: Generate jars from manifest
       run: ./java-jar.sh
       
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - name: Auto commit
+      uses: stefanzweifel/git-auto-commit-action@v4.4.0
       with:
       # Required
       commit_message: Auto-update binaries
