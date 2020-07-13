@@ -26,17 +26,33 @@ jobs:
     - uses: actions/checkout@v2
       with:
           ref: ${{ github.head_ref }}
-
-    - name: Change file permissions
-      run: |
-        chmod +x java-compile.sh
-        chmod +x java-jar.sh
       
     - name: Compile source code
-      run: ./java-compile.sh
+      run: |
+        cd src/
+        find -name "*.java" > sources.txt
+        mkdir "../bin/classes"
+        javac -d "../bin/classes/" @sources.txt
+        unlink sources.txt
+        cd ../
     
     - name: Generate jars from manifest
-      run: ./java-jar.sh
+      run: |
+        cd bin/manifests
+
+        for file in *.mf; do(
+            fileName="$(basename -s .mf $file)";
+            echo $file;
+            
+            cd ../classes/
+            jar cfm "../$fileName.jar" "../manifests/$file" "./";
+            cd ../manifests/
+        ) done
+
+        cd ../../
+    - name: Delete .class files
+      run: |
+        rm -rf bin/classes
       
     - name: Auto commit
       uses: stefanzweifel/git-auto-commit-action@v4.4.0
