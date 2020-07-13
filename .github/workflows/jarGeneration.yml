@@ -31,7 +31,7 @@ jobs:
       run: |
         rootPath=$(pwd)
 
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
         echo "Compiling source code..."
         compileSrc(){
           cd $rootPath
@@ -40,12 +40,12 @@ jobs:
           srcPath="$projectPath/src"
           binPath="$projectPath/bin"
 
-          echo "------------------------------------------"
+          echo "---------------------------------------------------------------------------------"
           echo "Project name: $1"
           echo "Project path: $projectPath"
           echo "Project src path: $srcPath"
           echo "Project bin path: $binPath"
-          echo "------------------------------------------"
+          echo "---------------------------------------------------------------------------------"
 
           cd $srcPath
 
@@ -54,21 +54,22 @@ jobs:
           javac -d "$binPath/classes/" @sources.txt
           unlink sources.txt
 
-          echo "------------------------------------------"
           echo "COMPILATION FOR PROJECT $1 FINISHED"
           cd $rootPath
         }
         compileSrc "proj1"
         compileSrc "proj2"
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
         echo "COMPILED SOURCE CODE"
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
     
     - name: Generate jars using manifests
       run: |
         rootPath=$(pwd)
 
+        echo "---------------------------------------------------------------------------------"
         echo "Generating jars using manifests..."
+        echo "---------------------------------------------------------------------------------"
         generateJar(){
           cd $rootPath
 
@@ -93,14 +94,14 @@ jobs:
         }
         generateJar "proj1"
         generateJar "proj2"
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
         echo "GENERATED JARS USING MANIFESTS"
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
         
     - name: Clean projects
       run: |
         rootPath=$(pwd)
-
+        echo "---------------------------------------------------------------------------------"
         echo "Clean projects..."
         clean(){
           cd $rootPath
@@ -111,9 +112,9 @@ jobs:
         }
         clean "proj1"
         clean "proj2"
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
         echo "CLEANED PROJECTS"
-        echo "------------------------------------------"
+        echo "---------------------------------------------------------------------------------"
       
     - name: Auto commit
       uses: stefanzweifel/git-auto-commit-action@v4.4.0
