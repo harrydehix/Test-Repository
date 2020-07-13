@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Working Directory
+name: Generate .jar files from source code and manifests
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -23,11 +23,8 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: Print working directory
-      run: pwd
+    - name: Compile source code
+      run: ./java-compile.sh
     
-    - name: Print ls
-      run: ls
-    
-    - name: Print javac version
-      run: javac -version
+    - name: Generate jars from manifest
+      run: ./java-jar.sh
