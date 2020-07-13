@@ -55,6 +55,8 @@ jobs:
           cd $srcPath1
           find "$srcPath1" "$srcPath2" -name "*.java" > sources.txt
 
+          cat sources.txt
+
           mkdir -p "$binPath1/classes"
           javac -d "$binPath1/classes/" @sources.txt
           unlink sources.txt
