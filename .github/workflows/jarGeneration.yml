@@ -35,8 +35,8 @@ jobs:
           cd $rootPath
 
           projectPath="$rootPath/$1"
-          srcPath="$rootPath/$projectPath/src"
-          binPath="$rootPath/$projectPath/bin"
+          srcPath="$projectPath/src"
+          binPath="$projectPath/bin"
 
           echo "Root path is: $rootPath"
           echo "Src path is: $srcPath"
@@ -62,8 +62,8 @@ jobs:
           cd $rootPath
 
           projectPath="$rootPath/$1"
-          srcPath="$rootPath/$projectPath/src"
-          binPath="$rootPath/$projectPath/bin"
+          srcPath="$projectPath/src"
+          binPath="$projectPath/bin"
 
           echo "Root path is: $rootPath"
           echo "Src path is: $srcPath"
