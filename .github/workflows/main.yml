@@ -25,3 +25,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: Print working directory
       run: pwd
+    
+    - name: Print ls
+      run: ls
