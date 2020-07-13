@@ -29,9 +29,9 @@ jobs:
       
     - name: Compile source code
       run: |
-        pwd
+        rootPath = $(pwd)
+        echo rootPath
         compileSrc(){
-          rootPath=$(pwd)
 
           cd $0
           srcPath=$(pwd)
