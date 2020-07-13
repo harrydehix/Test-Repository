@@ -28,3 +28,6 @@ jobs:
     
     - name: Print ls
       run: ls
+    
+    - name: Print javac version
+      run: javac -version
