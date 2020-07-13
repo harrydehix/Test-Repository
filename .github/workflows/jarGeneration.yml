@@ -77,6 +77,14 @@ jobs:
           srcPath="$projectPath/src"
           binPath="$projectPath/bin"
 
+          if [ -z "$2" ]
+          then
+                echo "No other project was linked"
+          else
+                linkedProjectClassPath="$rootPath/$2/bin/classes/"
+                echo "Linked other project"
+          fi
+
           cd "$binPath/manifests"
 
           for file in *.mf; do(
@@ -84,7 +92,12 @@ jobs:
               echo $file;
               
               cd ../classes/
-              jar cfm "../$fileName.jar" "../manifests/$file" "./";
+              if [ -z "$2" ]
+              then
+                    jar cfm "../$fileName.jar" "../manifests/$file" "./";
+              else
+                    jar cfm "../$fileName.jar" "../manifests/$file" "./" "$linkedProjectClassPath";
+              fi
               cd ../manifests/
           ) done
 
@@ -92,7 +105,7 @@ jobs:
 
           cd $rootPath
         }
-        generateJar "proj1"
+        generateJar "proj1" "proj2"
         generateJar "proj2"
         echo "---------------------------------------------------------------------------------"
         echo "GENERATED JARS USING MANIFESTS"
