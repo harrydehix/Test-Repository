@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Generate .jar files from source code and manifests
+name: Build java projects
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -16,7 +16,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   generate_jars_from_src:
-    name: Generate jars from src
+    name: Compile source code and generate jars
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -49,8 +49,8 @@ jobs:
 
           cd rootPath
         }
-        compileSrc "proj1/src/" "proj1/bin/"
-        compileSrc "proj2/src/" "proj2/bin/"
+        compileSrc proj1/src/ proj1/bin/
+        compileSrc proj2/src/ proj2/bin/
     
     - name: Generate jars from manifest
       run: |
@@ -77,8 +77,8 @@ jobs:
 
           cd $rootPath
         }
-        generateJar "proj1/src/" "proj1/bin/"
-        generateJar "proj2/src/" "proj2/bin/"
+        generateJar proj1/src/ proj1/bin/
+        generateJar proj2/src/ proj2/bin/
         
     - name: Delete .class files
       run: |
