@@ -34,12 +34,12 @@ jobs:
         compileSrc(){
           cd $rootPath
 
-          srcPath="{$rootPath}{$1}"
-          binPath="{$rootPath}{$2}"
+          srcPath="$rootPath$1"
+          binPath="$rootPath$2"
 
-          echo "Root path is: {$rootPath}"
-          echo "Src path is: {$srcPath}"
-          echo "Bin path is: {$binPath}"
+          echo "Root path is: $rootPath"
+          echo "Src path is: $srcPath"
+          echo "Bin path is: $binPath"
 
           cd $srcPath
 
