@@ -29,27 +29,57 @@ jobs:
       
     - name: Compile source code
       run: |
-        cd src/
-        find -name "*.java" > sources.txt
-        mkdir -p "../bin/classes"
-        javac -d "../bin/classes/" @sources.txt
-        unlink sources.txt
-        cd ../
+        compileSrc(){
+          rootPath=$(pwd)
+
+          cd $0
+          srcPath=$(pwd)
+          cd $rootPath
+
+          cd $1
+          binPath=$(pwd)
+
+
+          cd $srcPath
+
+          find -name "*.java" > sources.txt
+          mkdir -p "$binPath/classes"
+          javac -d "$binPath/classes/" @sources.txt
+          unlink sources.txt
+
+          cd rootPath
+        }
+        compileSrc "proj1/src/" "proj1/bin/"
+        compileSrc "proj2/src/" "proj2/bin/"
     
     - name: Generate jars from manifest
       run: |
-        cd bin/manifests
+        generateJar(){
+          rootPath=$(pwd)
 
-        for file in *.mf; do(
-            fileName="$(basename -s .mf $file)";
-            echo $file;
-            
-            cd ../classes/
-            jar cfm "../$fileName.jar" "../manifests/$file" "./";
-            cd ../manifests/
-        ) done
+          cd $0
+          srcPath=$(pwd)
+          cd $rootPath
 
-        cd ../../
+          cd $1
+          binPath=$(pwd)
+
+          cd $binPath/manifests
+
+          for file in *.mf; do(
+              fileName="$(basename -s .mf $file)";
+              echo $file;
+              
+              cd ../classes/
+              jar cfm "../$fileName.jar" "../manifests/$file" "./";
+              cd ../manifests/
+          ) done
+
+          cd $rootPath
+        }
+        generateJar "proj1/src/" "proj1/bin/"
+        generateJar "proj2/src/" "proj2/bin/"
+        
     - name: Delete .class files
       run: |
         rm -rf bin/classes
