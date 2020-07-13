@@ -34,11 +34,11 @@ jobs:
         compileSrc(){
           cd $rootPath
 
-          cd $0
+          cd "$rootPath/$0"
           srcPath=$(pwd)
           cd $rootPath
 
-          cd $1
+          cd "$rootPath/$1"
           binPath=$(pwd)
 
 
@@ -51,8 +51,8 @@ jobs:
 
           cd rootPath
         }
-        compileSrc proj1/src/ proj1/bin/
-        compileSrc proj2/src/ proj2/bin/
+        compileSrc "proj1/src/" "proj1/bin/"
+        compileSrc "proj2/src/" "proj2/bin/"
     
     - name: Generate jars from manifest
       run: |
@@ -61,11 +61,11 @@ jobs:
         generateJar(){
           cd $rootPath
 
-          cd $0
+          cd "$rootPath/$0"
           srcPath=$(pwd)
           cd $rootPath
 
-          cd $1
+          cd "$rootPath/$1"
           binPath=$(pwd)
 
           cd $binPath/manifests
@@ -81,8 +81,8 @@ jobs:
 
           cd $rootPath
         }
-        generateJar proj1/src/ proj1/bin/
-        generateJar proj2/src/ proj2/bin/
+        generateJar "proj1/src/" "proj1/bin/"
+        generateJar "proj2/src/" "proj2/bin/"
         
     - name: Delete .class files
       run: |
