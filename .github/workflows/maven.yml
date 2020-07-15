@@ -31,9 +31,6 @@ jobs:
         # Optional branch to push to, defaults to the current branch
         branch: master
 
-        # Optional glob pattern of files which should be added to the commit
-        file_pattern: .jar
-
         # Optional commit user and author settings
         commit_user_name: Update Binaries Bot
         commit_user_email: update-binaries@stamacoding.bot
