@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: app.File
-Built-By: Henri
-Created-By: 1.8.0_171
-Class-Path: ../../../lib/*
-
