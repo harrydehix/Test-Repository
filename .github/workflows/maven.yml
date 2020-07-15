@@ -22,3 +22,24 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file mavenTestProject/pom.xml
+    - name: Auto commit generated jar files
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        # Required
+        commit_message: Auto update binaries
+
+        # Optional branch to push to, defaults to the current branch
+        branch: master
+
+        # Optional glob pattern of files which should be added to the commit
+        file_pattern: .jar
+
+        # Optional commit user and author settings
+        commit_user_name: Update Binaries Bot
+        commit_user_email: update-binaries@stamacoding.bot
+        commit_author: Update Binaries Bot <update-binaries@stamacoding.bot>
+
+        push_options: '--force'
+
+        # Optional: Disable dirty check and always try to create a commit and push
+        skip_dirty_check: true
